@@ -1,0 +1,3 @@
+Author: Richie Zeng
+Organization: Center for X-Ray Optics at Lawrence Berkeley National Lab
+This is the C++ source code allowing the Princeton Instruments PVCAM to interface with IDL(Interactive Data Language). Developed for use at the CXRO's new SHARP X-Ray microscope.
