@@ -38,7 +38,7 @@ by Bob Gunion in 2008.
 #include "pvcam.h"
 
 
-IDL_VPTR pvcam_init(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_init(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 *hcam;                         /* A pointer to the camera's handle. */
@@ -47,16 +47,16 @@ IDL_VPTR pvcam_init(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 1)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = (int16 *)IDL_LongScalar(argv[0]);
 
-  return IDL_GettmpUInt(ccd_init(hcam));
+  //return IDL_GettmpUInt(ccd_init(hcam));
 }
 
-IDL_VPTR pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -65,13 +65,13 @@ IDL_VPTR pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 1)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
 
-  return IDL_GettmpUInt(ccd_uninit(hcam));
+  //return IDL_GettmpUInt(ccd_uninit(hcam));
 }
 
 IDL_VPTR pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
@@ -96,7 +96,7 @@ IDL_VPTR pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(ccd_get_size(hcam, ser, par));
 }
 
-IDL_VPTR pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -108,7 +108,7 @@ IDL_VPTR pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
   if ((argc != 7) && (argc != 9))
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
@@ -135,10 +135,10 @@ IDL_VPTR pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
     stream_size = (uns32 *)IDL_ULongScalar(argv[6]);
   }
 
-  return IDL_GettmpUInt(ccd_setup(hcam, exposure_time, s1, s2, p1, p2, sbin, pbin, stream_size));
+  //return IDL_GettmpUInt(ccd_setup(hcam, exposure_time, s1, s2, p1, p2, sbin, pbin, stream_size));
 }
 
-IDL_VPTR pvcam_exp_start(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_exp_start(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -148,14 +148,14 @@ IDL_VPTR pvcam_exp_start(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   image = (uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_exp_start(hcam, image));
+  //return IDL_GettmpUInt(ccd_exp_start(hcam, image));
 }
 
 IDL_VPTR pvcam_exp_check_status(int argc, IDL_VPTR argv[], char *argk)
@@ -183,7 +183,7 @@ IDL_VPTR pvcam_exp_check_status(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }
 
-IDL_VPTR pvcam_exp_halt(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_exp_halt(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -197,10 +197,10 @@ IDL_VPTR pvcam_exp_halt(int argc, IDL_VPTR argv[], char *argk)
     cam_state = *(int16 *)IDL_LongScalar(argv[1]);
   } else {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
-  return IDL_GettmpUInt(ccd_exp_halt(hcam, cam_state));
+  //return IDL_GettmpUInt(ccd_exp_halt(hcam, cam_state));
 }
 
 IDL_VPTR pvcam_get_ccs_status(int argc, IDL_VPTR argv[], char *argk)
@@ -245,7 +245,7 @@ IDL_VPTR pvcam_get_shtr_status(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }   
 
-IDL_VPTR pvcam_shtr_open_never(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_shtr_open_never(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -254,16 +254,16 @@ IDL_VPTR pvcam_shtr_open_never(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 1)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
 
-  return IDL_GettmpUInt(ccd_shtr_open_never(hcam));
+  //return IDL_GettmpUInt(ccd_shtr_open_never(hcam));
 }
 
-IDL_VPTR pvcam_shtr_open_normal(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_shtr_open_normal(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -272,13 +272,13 @@ IDL_VPTR pvcam_shtr_open_normal(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 1)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    ///return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
 
-  return IDL_GettmpUInt(ccd_shtr_open_normal(hcam));
+  //return IDL_GettmpUInt(ccd_shtr_open_normal(hcam));
 }
 
 IDL_VPTR pvcam_get_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
@@ -302,7 +302,7 @@ IDL_VPTR pvcam_get_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }   
 
-IDL_VPTR pvcam_set_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -312,14 +312,14 @@ IDL_VPTR pvcam_set_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   shtr_open_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_shtr_open_dly(hcam, shtr_open_dly));
+  //return IDL_GettmpUInt(ccd_set_shtr_open_dly(hcam, shtr_open_dly));
 }   
 
 IDL_VPTR pvcam_get_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
@@ -343,7 +343,7 @@ IDL_VPTR pvcam_get_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }   
 
-IDL_VPTR pvcam_set_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -353,14 +353,14 @@ IDL_VPTR pvcam_set_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   shtr_close_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_shtr_close_dly(hcam, shtr_close_dly));
+  //return IDL_GettmpUInt(ccd_set_shtr_close_dly(hcam, shtr_close_dly));
 }   
 
 IDL_VPTR pvcam_get_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
@@ -384,7 +384,7 @@ IDL_VPTR pvcam_get_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }   
 
-IDL_VPTR pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -394,13 +394,13 @@ IDL_VPTR pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   clear_cycles = *(uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_clear_cycles(hcam, clear_cycles));
+  //return IDL_GettmpUInt(ccd_set_clear_cycles(hcam, clear_cycles));
 }
 
 IDL_VPTR pvcam_get_tmp(int argc, IDL_VPTR argv[], char *argk)
@@ -445,7 +445,7 @@ IDL_VPTR pvcam_get_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }
 
-IDL_VPTR pvcam_set_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -455,14 +455,14 @@ IDL_VPTR pvcam_set_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   tmp_setpoint = *(float *)argv[1];
 
-  return IDL_GettmpUInt(ccd_set_tmp_setpoint(hcam, tmp_setpoint));
+  //return IDL_GettmpUInt(ccd_set_tmp_setpoint(hcam, tmp_setpoint));
 }
 
 IDL_VPTR pvcam_get_max_gain(int argc, IDL_VPTR argv[], char *argk)
@@ -508,7 +508,7 @@ IDL_VPTR pvcam_get_gain(int argc, IDL_VPTR argv[], char *argk)
   return IDL_GettmpUInt(1);
 }   
 
-IDL_VPTR pvcam_set_gain(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_gain(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -518,14 +518,14 @@ IDL_VPTR pvcam_set_gain(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   gain = *(int16 *)IDL_LongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_gain(hcam, gain));
+  //return IDL_GettmpUInt(ccd_set_gain(hcam, gain));
 }   
 
 IDL_VPTR pvcam_get_speed(int argc, IDL_VPTR argv[], char *argk)
@@ -601,7 +601,7 @@ IDL_VPTR pvcam_get_speed_mode(int argc, IDL_VPTR argv[], char *argk)
 * @param speed the table index
 * @return 1 on success, 0 on failure
 */
-IDL_VPTR pvcam_set_speed_mode(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_speed_mode(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -611,14 +611,14 @@ IDL_VPTR pvcam_set_speed_mode(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   speed = *(int16 *)IDL_LongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_speed_mode(hcam, speed));
+  //return IDL_GettmpUInt(ccd_set_speed_mode(hcam, speed));
 }   
 
 /**
@@ -688,7 +688,7 @@ IDL_VPTR pvcam_get_retries(int argc, IDL_VPTR argv[], char *argk)
 * @param retries the maximum number of retries
 * @return 1 on success, 0 on failure
 */
-IDL_VPTR pvcam_set_retries(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_retries(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -698,14 +698,14 @@ IDL_VPTR pvcam_set_retries(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   retries = *(uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_retries(hcam, retries));
+  //return IDL_GettmpUInt(ccd_set_retries(hcam, retries));
 }   
 
 IDL_VPTR pvcam_get_timeout(int argc, IDL_VPTR argv[], char *argk)
@@ -741,7 +741,7 @@ IDL_VPTR pvcam_get_timeout(int argc, IDL_VPTR argv[], char *argk)
 * @param m_sec the timeout setting in milliseconds
 * @return 1 on success, 0 on failure
 */
-IDL_VPTR pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
+void pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
@@ -751,14 +751,14 @@ IDL_VPTR pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
   if (argc != 2)
   {
     IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
+    //return IDL_GettmpUInt(0);
   }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   m_sec = *(uns16 *)IDL_ULongScalar(argv[1]);
 
-  return IDL_GettmpUInt(ccd_set_timeout(hcam, m_sec));
+  //return IDL_GettmpUInt(ccd_set_timeout(hcam, m_sec));
 }   
 
 IDL_VPTR pvcam_get_frame_capable(int argc, IDL_VPTR argv[], char *argk)
