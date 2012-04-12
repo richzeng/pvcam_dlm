@@ -22,13 +22,6 @@ void pvcam_init(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 *hcam;                         /* A pointer to the camera's handle. */
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 1)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = (int16 *)IDL_LongScalar(argv[0]);
 
@@ -40,13 +33,6 @@ void pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 1)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
@@ -60,13 +46,6 @@ IDL_VPTR pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 *ser, *par;                    /* Pointers to the max image size. */
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 3)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);

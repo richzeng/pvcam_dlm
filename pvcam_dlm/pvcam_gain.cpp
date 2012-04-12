@@ -23,13 +23,6 @@ IDL_VPTR pvcam_get_max_gain(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 *max_gain;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   ccd_get_max_gain(hcam, max_gain);
@@ -45,13 +38,6 @@ IDL_VPTR pvcam_get_gain(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 *gain;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   ccd_get_gain(hcam, gain);
@@ -66,13 +52,6 @@ void pvcam_set_gain(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 gain;
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);

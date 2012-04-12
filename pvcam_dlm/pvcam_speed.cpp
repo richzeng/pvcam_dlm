@@ -23,13 +23,6 @@ IDL_VPTR pvcam_get_speed(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 *speed;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   ccd_get_speed(hcam, speed);
@@ -44,13 +37,6 @@ IDL_VPTR pvcam_get_speed_entries(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 *entries;
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
@@ -67,13 +53,6 @@ IDL_VPTR pvcam_get_speed_mode(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 *speed;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   ccd_get_speed_mode(hcam, speed);
@@ -89,13 +68,6 @@ void pvcam_set_speed_mode(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 speed;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   speed = *(int16 *)IDL_LongScalar(argv[1]);
@@ -109,13 +81,6 @@ IDL_VPTR pvcam_get_bits(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 *bits;
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);

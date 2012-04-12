@@ -65,6 +65,14 @@ extern "C" {
   
   /* pvcam_get_ccs_status(short hcam, short *ccs_status); */
   IDL_VPTR pvcam_get_ccs_status(int argc, IDL_VPTR argv[], char *argk);
+
+  /* pvcam_get_frame_capable(short hcam, unsigned short *frame_capable); */
+  IDL_VPTR pvcam_get_frame_capable(int argc, IDL_VPTR argv[], char *argk);
+
+
+/*****************************************************************************
+  pvcam_exposure.cpp
+*****************************************************************************/
   
   /* pvcam_get_shtr_status(short hcam, short *shtr_status); */
   IDL_VPTR pvcam_get_shtr_status(int argc, IDL_VPTR argv[], char *argk);
@@ -92,9 +100,6 @@ extern "C" {
   
   /* pvcam_set_clear_cycles(short hcam, unsigned short clear_cycles); */
   void pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk);
-
-  /* pvcam_get_frame_capable(short hcam, unsigned short *frame_capable); */
-  IDL_VPTR pvcam_get_frame_capable(int argc, IDL_VPTR argv[], char *argk);
 
 
 /*****************************************************************************

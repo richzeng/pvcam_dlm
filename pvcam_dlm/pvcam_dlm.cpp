@@ -28,7 +28,7 @@ int IDL_Load(void)
 
 		{(IDL_FUN_RET)pvcam_exp_start, "PVCAM_EXP_START", 2, 2, 0, 0},
 		{(IDL_FUN_RET)pvcam_exp_check_status, "PVCAM_EXP_CHECK_STATUS", 3, 3, 0, 0},
-		{(IDL_FUN_RET)pvcam_exp_halt, "PVCAM_EXP_HALT", 2, 2, 0, 0},
+		{(IDL_FUN_RET)pvcam_exp_halt, "PVCAM_EXP_HALT", 1, 2, 0, 0},
 		{(IDL_FUN_RET)pvcam_get_ccs_status, "PVCAM_GET_CCS_STATUS", 2, 2, 0, 0},
 		{(IDL_FUN_RET)pvcam_get_shtr_status, "PVCAM_GET_SHTR_STATUS", 2, 2, 0, 0},
 		{(IDL_FUN_RET)pvcam_shtr_open_never, "PVCAM_SHTR_OPEN_NEVER", 1, 1, 0, 0},

@@ -22,13 +22,6 @@ IDL_VPTR pvcam_get_retries(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 *retries;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   ccd_get_retries(hcam, retries);
@@ -44,13 +37,6 @@ void pvcam_set_retries(int argc, IDL_VPTR argv[], char *argk)
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 retries;
 
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
-
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   retries = *(uns16 *)IDL_ULongScalar(argv[1]);
@@ -64,13 +50,6 @@ IDL_VPTR pvcam_get_timeout(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 *m_sec;
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
@@ -86,13 +65,6 @@ void pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 m_sec;
-
-  /* Return an error if the parameters are incorrect. */
-  if (argc != 2)
-  {
-    IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_LONGJMP, "You entered the wrong number of parameters!\n");
-    //return IDL_GettmpUInt(0);
-  }
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
