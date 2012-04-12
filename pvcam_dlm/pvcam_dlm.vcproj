@@ -179,7 +179,31 @@
 				>
 			</File>
 			<File
-				RelativePath=".\pvcam_dlm_functions.cpp"
+				RelativePath=".\pvcam_exposure.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_gain.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_init.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_shutter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_speed.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_temperature.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\pvcam_timeout.cpp"
 				>
 			</File>
 			<File
