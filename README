@@ -2,4 +2,18 @@ AUTHOR: Richie Zeng, Robert Gunion, Kenneth Goldberg
 
 ORGANIZATION: Center for X-Ray Optics at Lawrence Berkeley National Lab
 
-DESCRIPTION: This is the C++ source code allowing the Princeton Instruments PVCAM to interface with IDL(Interactive Data Language). Developed for use at the CXRO's new SHARP X-Ray microscope.
+DESCRIPTION: This is the C++ source code allowing the Princeton Instruments 
+PVCAM to interface with IDL(Interactive Data Language). Developed for use a
+the CXRO's new SHARP X-Ray microscope.
+
+TODO: Add error handling to all the functions/procedures. Modify getters to
+explicitly return the values.
+
+Saved for later:
+  pvcam_get_size - assigns value to two references
+  pvcam_exp_check_status
+
+Updated files(minus the above exceptions):
+  pvcam_init.cpp
+  half of pvcam_exposure.cpp
+

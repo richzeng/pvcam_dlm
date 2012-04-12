@@ -24,6 +24,19 @@ by Bob Gunion in 2008.
 /* Handy macro to find the size of an array */
 #define ARRLEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
+
+/* Structure for IDL keywords. Allows IDL to use the error keyword */
+typedef struct{
+	IDL_KW_RESULT_FIRST_FIELD; /* Must be first entry in structure */
+  IDL_VPTR	iError;
+} KW_RESULT;
+
+static IDL_KW_PAR kw_pars[] = { IDL_KW_FAST_SCAN,
+	{"ERROR",IDL_TYP_UNDEF,1,IDL_KW_OUT|IDL_KW_ZERO,0,(char *)IDL_KW_OFFSETOF(iError)},
+	{NULL}
+};
+
+
 extern "C" {
 /*****************************************************************************
   pvcam_init.cpp
