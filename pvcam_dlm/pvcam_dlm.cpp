@@ -25,6 +25,7 @@ int IDL_Load(void)
 		{(IDL_FUN_RET)pvcam_uninit, "PVCAM_UNINIT", 1, 1, 0, 0},
 		{(IDL_FUN_RET)pvcam_get_size, "PVCAM_GET_SIZE", 3, 3, 0, 0},
 		{(IDL_FUN_RET)pvcam_setup, "PVCAM_SETUP", 7, 9, 0, 0},
+
 		{(IDL_FUN_RET)pvcam_exp_start, "PVCAM_EXP_START", 2, 2, 0, 0},
 		{(IDL_FUN_RET)pvcam_exp_check_status, "PVCAM_EXP_CHECK_STATUS", 3, 3, 0, 0},
 		{(IDL_FUN_RET)pvcam_exp_halt, "PVCAM_EXP_HALT", 2, 2, 0, 0},
