@@ -20,14 +20,22 @@ IDL_VPTR pvcam_get_shtr_status(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  int16 *shtr_status;
+  int16 shtr_status;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_shtr_status(hcam, shtr_status);
-  IDL_StoreScalar(argv[1], IDL_TYP_LONG, (IDL_ALLTYPES *) &shtr_status);
+  error = !ccd_get_shtr_status(hcam, &shtr_status);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpInt(shtr_status);
 }   
 
 
@@ -35,11 +43,19 @@ void pvcam_shtr_open_never(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  error = !ccd_shtr_open_never(hcam);
 
-  //return IDL_GettmpUInt(ccd_shtr_open_never(hcam));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 }
 
 
@@ -47,11 +63,19 @@ void pvcam_shtr_open_normal(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  error = !ccd_shtr_open_normal(hcam);
 
-  //return IDL_GettmpUInt(ccd_shtr_open_normal(hcam));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 }
 
 
@@ -59,14 +83,22 @@ IDL_VPTR pvcam_get_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *shtr_open_dly;
+  uns16 shtr_open_dly;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_shtr_open_dly(hcam, shtr_open_dly);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &shtr_open_dly);
+  error = !ccd_get_shtr_open_dly(hcam, &shtr_open_dly);
+
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
   
-  return IDL_GettmpUInt(1);
+  return IDL_GettmpUInt(shtr_open_dly);
 }   
 
 
@@ -75,27 +107,43 @@ void pvcam_set_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 shtr_open_dly;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   shtr_open_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
+  error = !ccd_set_shtr_open_dly(hcam, shtr_open_dly);
 
-  //return IDL_GettmpUInt(ccd_set_shtr_open_dly(hcam, shtr_open_dly));
-}   
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+}
 
 
 IDL_VPTR pvcam_get_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *shtr_close_dly;
+  uns16 shtr_close_dly;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_shtr_close_dly(hcam, shtr_close_dly);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &shtr_close_dly);
+  error = !ccd_get_shtr_close_dly(hcam, &shtr_close_dly);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(shtr_close_dly);
 }   
 
 
@@ -104,12 +152,20 @@ void pvcam_set_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 shtr_close_dly;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   shtr_close_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
+  error = ccd_set_shtr_close_dly(hcam, shtr_close_dly);
 
-  //return IDL_GettmpUInt(ccd_set_shtr_close_dly(hcam, shtr_close_dly));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 }   
 
 
@@ -117,14 +173,22 @@ IDL_VPTR pvcam_get_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *cycles;
+  uns16 cycles;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_clear_cycles(hcam, cycles);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &cycles);
+  error = !ccd_get_clear_cycles(hcam, &cycles);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(cycles);
 }
 
 
@@ -133,9 +197,17 @@ void pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 clear_cycles;                 /* The number of clears. */
+  char error = 0;
 
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
   clear_cycles = *(uns16 *)IDL_ULongScalar(argv[1]);
+  error = !ccd_set_clear_cycles(hcam, clear_cycles);
 
-  //return IDL_GettmpUInt(ccd_set_clear_cycles(hcam, clear_cycles));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 }

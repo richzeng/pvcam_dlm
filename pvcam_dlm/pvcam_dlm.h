@@ -43,13 +43,13 @@ extern "C" {
 *****************************************************************************/
 
   /* pvcam_init(short *hcam); */
-  void pvcam_init(int argc, IDL_VPTR argv[], char *argk);
+  void IDL_CDECL pvcam_init(int argc, IDL_VPTR argv[], char *argk);
   
   /* pvcam_uninit(short hcam); */
-  void pvcam_uninit(int argc, IDL_VPTR argv[], char *argk);
+  void IDL_CDECL pvcam_uninit(int argc, IDL_VPTR argv[], char *argk);
   
   /* pvcam_get_size(short hcam, unsigned short* ser, unsigned short* par); */
-  IDL_VPTR pvcam_get_size(int argc, IDL_VPTR argv[], char *argk);
+  IDL_VPTR IDL_CDECL pvcam_get_size(int argc, IDL_VPTR argv[], char *argk);
   
   /* pvcam_setup(short hcam,
                  unsigned long exposure_time,

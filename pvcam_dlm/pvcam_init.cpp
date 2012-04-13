@@ -17,15 +17,15 @@ by Bob Gunion in 2008.
 #include "pvcam.h"
 
 
-void pvcam_init(int argc, IDL_VPTR argv[], char *argk)
+void IDL_CDECL pvcam_init(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
-  int16 *hcam;                         /* A pointer to the camera's handle. */
-  char error;
+  int16 hcam;                         /* A pointer to the camera's handle. */
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = (int16 *)IDL_LongScalar(argv[0]);
-  error = (char)ccd_init(hcam);
+  error = !ccd_init(&hcam);
+  IDL_StoreScalar(argv[0], IDL_TYP_INT, (IDL_ALLTYPES*) &hcam);
 
   /* Handling the error keyword */
   KW_RESULT kw;
@@ -37,15 +37,15 @@ void pvcam_init(int argc, IDL_VPTR argv[], char *argk)
 }
 
 
-void pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
+void IDL_CDECL pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  char error;
+  char error = 0;
   
   /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  error = (char)ccd_uninit(hcam);
+  error = !ccd_uninit(hcam);
 
   /* Handling the error keyword */
   KW_RESULT kw;
@@ -57,20 +57,25 @@ void pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
 }
 
 
-IDL_VPTR pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
+IDL_VPTR IDL_CDECL pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *ser, *par;                    /* Pointers to the max image size. */
-  char error;
+  uns16 ser, par;                    /* Pointers to the max image size. */
+  char error = 0;
+  unsigned short *arr;
+  IDL_VPTR rtnArray;
+  IDL_LONG n[IDL_MAX_ARRAY_DIM];
+  n[0]=2;
 
-  /* Point parameter variables to the actual IDL values. */
   hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_size(hcam, ser, par);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &ser);
-  IDL_StoreScalar(argv[2], IDL_TYP_ULONG, (IDL_ALLTYPES *) &par);
+  error = !ccd_get_size(hcam, &ser, &par);
+  
+  arr = (unsigned short*) IDL_MakeTempArray(IDL_TYP_UINT, 1, n, IDL_ARR_INI_ZERO, &rtnArray);
+  arr[0] = ser;
+  arr[1] = par;
 
-  return IDL_GettmpUInt(ccd_get_size(hcam, ser, par));
+  return rtnArray;
 }
 
 
@@ -81,7 +86,7 @@ void pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
   uns32 exposure_time;                /* The time to open the shutter. */
   uns16 s1, s2, p1, p2, sbin, pbin;   /* The region data for the camera. */
   uns32 *stream_size;                 /* The number of bytes needed. */
-  char error;
+  char error = 0;
 
   /* Return an error if the parameters are incorrect. */
   if ((argc != 7) && (argc != 9))
@@ -114,7 +119,7 @@ void pvcam_setup(int argc, IDL_VPTR argv[], char *argk)
     stream_size = (uns32 *)IDL_ULongScalar(argv[6]);
   }
   
-  error = ccd_setup(hcam, exposure_time, s1, s2, p1, p2, sbin, pbin, stream_size);
+  error = !ccd_setup(hcam, exposure_time, s1, s2, p1, p2, sbin, pbin, stream_size);
   
   /* Handling the error keyword */
   KW_RESULT kw;
