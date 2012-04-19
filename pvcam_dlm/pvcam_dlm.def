@@ -1,0 +1,4 @@
+LIBRARY			PVCAM_DLM
+DESCRIPTION		'Module to interface with the PVCAM'
+
+EXPORTS			IDL_Load		@1
