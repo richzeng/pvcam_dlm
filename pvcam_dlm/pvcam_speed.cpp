@@ -21,14 +21,22 @@ IDL_VPTR pvcam_get_speed(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *speed;
+  uns16 speed;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_speed(hcam, speed);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &speed);
+  hcam = IDL_LongScalar(argv[0]);
+  error = !ccd_get_speed(hcam, &speed);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(speed);
 }   
 
 
@@ -36,14 +44,22 @@ IDL_VPTR pvcam_get_speed_entries(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  int16 *entries;
+  int16 entries;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_speed_entries(hcam, entries);
-  IDL_StoreScalar(argv[1], IDL_TYP_LONG, (IDL_ALLTYPES *) &entries);
+  hcam = IDL_LongScalar(argv[0]);
+  error = !ccd_get_speed_entries(hcam, &entries);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpInt(entries);
 }   
 
 
@@ -51,14 +67,22 @@ IDL_VPTR pvcam_get_speed_mode(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  int16 *speed;
+  int16 speed;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_speed_mode(hcam, speed);
-  IDL_StoreScalar(argv[1], IDL_TYP_LONG, (IDL_ALLTYPES *) &speed);
+  hcam = IDL_LongScalar(argv[0]);
+  error = !ccd_get_speed_mode(hcam, &speed);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpInt(speed);
 }   
 
 
@@ -67,12 +91,21 @@ void pvcam_set_speed_mode(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   int16 speed;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  speed = *(int16 *)IDL_LongScalar(argv[1]);
+  hcam = IDL_LongScalar(argv[0]);
+  speed = IDL_LongScalar(argv[1]);
+  error = !ccd_set_speed_mode(hcam, speed);
 
-  //return IDL_GettmpUInt(ccd_set_speed_mode(hcam, speed));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
 }
 
 
@@ -80,12 +113,20 @@ IDL_VPTR pvcam_get_bits(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  int16 *bits;
+  int16 bits;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_bits(hcam, bits);
-  IDL_StoreScalar(argv[1], IDL_TYP_LONG, (IDL_ALLTYPES *) &bits);
+  hcam = IDL_LongScalar(argv[0]);
+  error = !ccd_get_bits(hcam, &bits);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(bits);
 }

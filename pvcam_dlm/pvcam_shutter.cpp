@@ -24,7 +24,7 @@ IDL_VPTR pvcam_get_shtr_status(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_get_shtr_status(hcam, &shtr_status);
 
   /* Handling the error keyword */
@@ -46,7 +46,7 @@ void pvcam_shtr_open_never(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_shtr_open_never(hcam);
 
   /* Handling the error keyword */
@@ -66,7 +66,7 @@ void pvcam_shtr_open_normal(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_shtr_open_normal(hcam);
 
   /* Handling the error keyword */
@@ -87,7 +87,7 @@ IDL_VPTR pvcam_get_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_get_shtr_open_dly(hcam, &shtr_open_dly);
 
   /* Handling the error keyword */
@@ -110,8 +110,8 @@ void pvcam_set_shtr_open_dly(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  shtr_open_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  shtr_open_dly = (uns16)IDL_ULongScalar(argv[1]);
   error = !ccd_set_shtr_open_dly(hcam, shtr_open_dly);
 
   /* Handling the error keyword */
@@ -132,7 +132,7 @@ IDL_VPTR pvcam_get_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_get_shtr_close_dly(hcam, &shtr_close_dly);
 
   /* Handling the error keyword */
@@ -155,9 +155,9 @@ void pvcam_set_shtr_close_dly(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  shtr_close_dly = *(uns16 *)IDL_ULongScalar(argv[1]);
-  error = ccd_set_shtr_close_dly(hcam, shtr_close_dly);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  shtr_close_dly = (uns16)IDL_ULongScalar(argv[1]);
+  error = !ccd_set_shtr_close_dly(hcam, shtr_close_dly);
 
   /* Handling the error keyword */
   KW_RESULT kw;
@@ -177,7 +177,7 @@ IDL_VPTR pvcam_get_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_get_clear_cycles(hcam, &cycles);
 
   /* Handling the error keyword */
@@ -199,8 +199,8 @@ void pvcam_set_clear_cycles(int argc, IDL_VPTR argv[], char *argk)
   uns16 clear_cycles;                 /* The number of clears. */
   char error = 0;
 
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  clear_cycles = *(uns16 *)IDL_ULongScalar(argv[1]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  clear_cycles = (uns16)IDL_ULongScalar(argv[1]);
   error = !ccd_set_clear_cycles(hcam, clear_cycles);
 
   /* Handling the error keyword */

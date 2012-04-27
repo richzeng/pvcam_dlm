@@ -111,7 +111,7 @@ extern "C" {
     /* Open the camera's connection. */
     if (!pl_cam_open(cam_name, hcam, OPEN_EXCLUSIVE))
     {
-      IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_INFO, "The camera is not ready. Make sure the camera is turned on.");
+      IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_INFO, "The camera is not ready.");
       pl_exp_uninit_seq();                /* Uninitialize data collection. */
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
       return(5);
@@ -482,8 +482,8 @@ extern "C" {
   */
   unsigned short ccd_get_shtr_status(int16 hcam, int16 *shtr_status) {
 
-    //if (!pl_shtr_get_status(*hcam, shtr_status))
-    if (!pl_get_param(hcam, PARAM_SHTR_STATUS, ATTR_CURRENT, shtr_status))
+    if (!pl_shtr_get_status(hcam, shtr_status))
+    //if (!pl_get_param(hcam, PARAM_SHTR_STATUS, ATTR_CURRENT, shtr_status))
     {
       return(0);
     }
@@ -526,6 +526,7 @@ extern "C" {
 
     /* Prevents the shutter from opening on exposure. */
     if (!pl_shtr_set_open_mode(hcam, OPEN_PRE_EXPOSURE))
+    //if (!pl_set_
     {
       return(0);
     }
