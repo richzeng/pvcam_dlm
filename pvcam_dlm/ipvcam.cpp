@@ -25,6 +25,7 @@
 #include "master.h"
 #include "pvcam.h"
 #include <stdio.h>
+#include "export.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                       DWORD  ul_reason_for_call,
@@ -79,14 +80,15 @@ extern "C" {
     /* Initialize driver. */
     if (!pl_pvcam_init())
     {
-      return(0);
+      IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_INFO, "Unable to initialize camera driver. Is your camera already initialized?");
+      return(1);
     }
 
     /* Initialize the data collection functions. */
     if (!pl_exp_init_seq())
     {
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
-      return(0);      
+      return(2);      
     }
 
     /* Check the number of cameras. */
@@ -94,33 +96,36 @@ extern "C" {
     {
       pl_exp_uninit_seq();                /* Uninitialize data collection. */
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
-      return(0);
+      return(3);
     }
 
     /* Get the camera's name. */
     if (!pl_cam_get_name(*hcam, cam_name))  /* pass hcam instead of 0*/
+    //if (!pl_cam_get_name(0, cam_name))
     {
       pl_exp_uninit_seq();                /* Uninitialize data collection. */
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
-      return(0);
+      return(4);
     }
 
     /* Open the camera's connection. */
     if (!pl_cam_open(cam_name, hcam, OPEN_EXCLUSIVE))
     {
+      IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_INFO, "The camera is not ready. Make sure the camera is turned on.");
       pl_exp_uninit_seq();                /* Uninitialize data collection. */
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
-      return(0);
+      return(5);
     }
 
     /* Check to make sure the camera is on and connected */
     if (!pl_cam_get_diags(*hcam))
     {
+      IDL_Message(IDL_M_NAMED_GENERIC, IDL_MSG_INFO, "The camera is not ready. Unitializing...");
       printf("The camera is not ready.\n");
       pl_cam_close(*hcam);                /* Close the camera's connection. */
       pl_exp_uninit_seq();                /* Uninitialize data collection. */
       pl_pvcam_uninit();                  /* Uninitialize the driver. */
-      return(0);
+      return(6);
     }
 
     /* Initialize the scripting functions. */
@@ -134,8 +139,9 @@ extern "C" {
     }
     */
 
-    return(TRUE);
+    return(0);
   }
+
 
   /**
   * Uninitialize the camera functions, freeing any resources

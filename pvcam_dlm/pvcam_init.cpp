@@ -22,9 +22,10 @@ void IDL_CDECL pvcam_init(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   char error = 0;
-
+  
+  hcam = (int16)IDL_LongScalar(argv[0]);
   /* Point parameter variables to the actual IDL values. */
-  error = !ccd_init(&hcam);
+  error = ccd_init(&hcam);
   IDL_StoreScalar(argv[0], IDL_TYP_INT, (IDL_ALLTYPES*) &hcam);
 
   /* Handling the error keyword */
@@ -44,7 +45,7 @@ void IDL_CDECL pvcam_uninit(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
   
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_uninit(hcam);
 
   /* Handling the error keyword */
@@ -68,7 +69,7 @@ IDL_VPTR IDL_CDECL pvcam_get_size(int argc, IDL_VPTR argv[], char *argk)
   IDL_LONG n[IDL_MAX_ARRAY_DIM];
   n[0]=2;
 
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = IDL_LongScalar(argv[0]);
   error = !ccd_get_size(hcam, &ser, &par);
   
   arr = (unsigned short*) IDL_MakeTempArray(IDL_TYP_UINT, 1, n, IDL_ARR_INI_ZERO, &rtnArray);

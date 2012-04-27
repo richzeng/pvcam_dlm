@@ -19,28 +19,29 @@ IDL_VPTR pvcam_get_tmp(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  float *cur_tmp;
+  float cur_tmp;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_tmp(hcam, cur_tmp);
-  IDL_StoreScalar(argv[1], IDL_TYP_FLOAT, (IDL_ALLTYPES *) &cur_tmp);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  ccd_get_tmp(hcam, &cur_tmp);
+  int rtn = (int)cur_tmp;             /* NOTE: NEED TO FIGURE OUT HOW TO RETURN FLOATS TO IDL */
 
-  return IDL_GettmpUInt(1);
-}   
+  //return IDL_GettmpDouble(cur_tmp);
+  return IDL_GettmpInt(rtn);
+}
 
 IDL_VPTR pvcam_get_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  float *tmp_setpoint;
+  float tmp_setpoint;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_tmp_setpoint(hcam, tmp_setpoint);
-  IDL_StoreScalar(argv[1], IDL_TYP_FLOAT, (IDL_ALLTYPES *) &tmp_setpoint);
+  hcam = IDL_LongScalar(argv[0]);
+  ccd_get_tmp_setpoint(hcam, &tmp_setpoint);
+  int rtn = (int)tmp_setpoint;        /* NOTE: NEED TO FIGURE OUT HOW TO RETURN FLOATS TO IDL */
 
-  return IDL_GettmpUInt(1);
+  return IDL_GettmpUInt(rtn);
 }
 
 void pvcam_set_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
@@ -50,8 +51,7 @@ void pvcam_set_tmp_setpoint(int argc, IDL_VPTR argv[], char *argk)
   float tmp_setpoint;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  tmp_setpoint = *(float *)argv[1];
-
-  //return IDL_GettmpUInt(ccd_set_tmp_setpoint(hcam, tmp_setpoint));
+  hcam = IDL_LongScalar(argv[0]);
+  tmp_setpoint = (float)IDL_DoubleScalar(argv[1]);
+  ccd_set_tmp_setpoint(hcam, tmp_setpoint);
 }

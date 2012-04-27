@@ -64,6 +64,7 @@
 				AdditionalDependencies="&quot;C:\Program Files\ITT\IDL71\bin\bin.x86\idl.lib&quot; &quot;pvcam32.lib&quot;"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;C:\Program Files\Princeton Instruments\PVCAM\SDK&quot;"
+				ModuleDefinitionFile="pvcam_dlm.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -236,7 +237,7 @@
 			>
 		</Filter>
 		<File
-			RelativePath=".\pvcam_dlm.dlm"
+			RelativePath="..\Debug\pvcam_dlm.dlm"
 			>
 		</File>
 	</Files>
