@@ -20,14 +20,22 @@ IDL_VPTR pvcam_get_retries(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *retries;
+  uns16 retries;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_retries(hcam, retries);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &retries);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  error = !ccd_get_retries(hcam, &retries);
 
-  return IDL_GettmpUInt(1);
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(retries);
 }   
 
 
@@ -36,10 +44,20 @@ void pvcam_set_retries(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 retries;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  retries = *(uns16 *)IDL_ULongScalar(argv[1]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  retries = (uns16)IDL_ULongScalar(argv[1]);
+  error = !ccd_set_retries(hcam, retries);
+
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 
   //return IDL_GettmpUInt(ccd_set_retries(hcam, retries));
 }   
@@ -49,15 +67,23 @@ IDL_VPTR pvcam_get_timeout(int argc, IDL_VPTR argv[], char *argk)
 {
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
-  uns16 *m_sec;
+  uns16 m_sec;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  ccd_get_timeout(hcam, m_sec);
-  IDL_StoreScalar(argv[1], IDL_TYP_ULONG, (IDL_ALLTYPES *) &m_sec);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  error = !ccd_get_timeout(hcam, &m_sec);
 
-  return IDL_GettmpUInt(1);
-}   
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
+
+  return IDL_GettmpUInt(m_sec);
+}
 
 
 void pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
@@ -65,10 +91,18 @@ void pvcam_set_timeout(int argc, IDL_VPTR argv[], char *argk)
   /* Parameter Variables */
   int16 hcam;                         /* A pointer to the camera's handle. */
   uns16 m_sec;
+  char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
-  m_sec = *(uns16 *)IDL_ULongScalar(argv[1]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
+  m_sec = (uns16)IDL_ULongScalar(argv[1]);
+  error = !ccd_set_timeout(hcam, m_sec);
 
-  //return IDL_GettmpUInt(ccd_set_timeout(hcam, m_sec));
+  /* Handling the error keyword */
+  KW_RESULT kw;
+  argc = IDL_KWProcessByOffset(argc,argv,argk,kw_pars,(IDL_VPTR *)0,1,&kw);
+  if (kw.iError) {
+    IDL_StoreScalar(kw.iError, IDL_TYP_BYTE, (IDL_ALLTYPES*) &error);
+  }
+  IDL_KW_FREE;
 }   

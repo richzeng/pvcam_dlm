@@ -1126,7 +1126,8 @@ extern "C" {
   */
   unsigned short ccd_set_retries(int16 hcam, uns16 retries) {
 
-    if (!pl_dd_set_retries(hcam, retries))
+    //if (!pl_dd_set_retries(hcam, retries))
+    if (!pl_set_param(hcam, PARAM_DD_RETRIES, (void *)&retries))
     {
       return(0);
     }

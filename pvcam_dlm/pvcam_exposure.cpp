@@ -25,7 +25,7 @@ void pvcam_exp_start(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16 )IDL_LongScalar(argv[0]);
   image = (uns16)IDL_ULongScalar(argv[1]);
 
   error = !ccd_exp_start(hcam, &image);
@@ -134,7 +134,7 @@ IDL_VPTR pvcam_get_frame_capable(int argc, IDL_VPTR argv[], char *argk)
   char error = 0;
 
   /* Point parameter variables to the actual IDL values. */
-  hcam = *(int16 *)IDL_LongScalar(argv[0]);
+  hcam = (int16)IDL_LongScalar(argv[0]);
   error = !ccd_get_frame_capable(hcam, &frame_capable);
   
   /* Handling the error keyword */
