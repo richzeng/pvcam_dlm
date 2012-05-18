@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\pvcam_cont.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\pvcam_dlm.cpp"
 				>
 			</File>
